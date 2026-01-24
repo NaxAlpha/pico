@@ -1,0 +1,35 @@
+{
+  "name": "pico",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "bunx wrangler@latest d1 migrations apply pico-db --local",
+    "db:migrate:prod": "bunx wrangler@latest d1 migrations apply pico-db --remote",
+    "db:migrate:preview": "bunx wrangler@latest d1 migrations apply --env preview pico-preview-db --remote",
+    "db:studio:local": "LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
+    "db:types": "bunx wrangler@latest types"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.12",
+    "@astrojs/react": "^4.4.2",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "astro": "^5.16.15",
+    "drizzle-orm": "^0.45.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.10",
+    "better-sqlite3": "^12.6.2",
+    "cross-env": "^10.1.0",
+    "drizzle-kit": "^0.31.8"
+  }
+}

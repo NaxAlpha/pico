@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDB } from '../lib/db';
+import { apps } from '../schema';
+
+let allApps: any[] = [];
+
+// Check if DB is available (not in dev mode)
+try {
+	const db = getDB(Astro.locals.runtime.env);
+	allApps = await db.select().from(apps).orderBy(apps.createdAt).limit(20);
+} catch (e) {
+	// DB not available in dev mode, that's okay
+	console.log('DB not available:', e);
+}
+---
+
+<Layout title="Pico - Create and Share Small Apps">
+	<div class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+		<header class="bg-white border-b border-gray-200">
+			<div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+				<h1 class="text-2xl font-bold text-purple-600">Pico</h1>
+				<nav class="flex gap-4">
+					<a href="/" class="text-gray-600 hover:text-purple-600 transition">Home</a>
+					<a href="/create" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Create App</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="max-w-6xl mx-auto px-4 py-16">
+			<div class="text-center mb-16">
+				<h2 class="text-5xl font-bold text-gray-900 mb-4">Create Small Apps, Share with Friends</h2>
+				<p class="text-xl text-gray-600 mb-8">Build self-contained HTML+CSS+JS apps instantly. No account required.</p>
+				<a href="/create" class="inline-block bg-purple-600 text-white text-lg px-8 py-4 rounded-xl hover:bg-purple-700 transition shadow-lg">
+					Create Your First App
+				</a>
+			</div>
+
+			<section>
+				<h3 class="text-2xl font-bold text-gray-900 mb-6">Recent Apps</h3>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{allApps.map((app) => (
+						<a href={`/app/${app.id}`} class="block bg-white rounded-xl shadow-md hover:shadow-lg transition p-6">
+							<h4 class="font-semibold text-lg text-gray-900 mb-2">{app.title}</h4>
+							<p class="text-sm text-gray-500">
+								{new Date(app.createdAt).toLocaleDateString()}
+							</p>
+						</a>
+					))}
+					{allApps.length === 0 && (
+						<div class="col-span-full text-center py-12 text-gray-500">
+							<p>No apps yet. Be the first to create one!</p>
+						</div>
+					)}
+				</div>
+			</section>
+		</main>
+	</div>
+</Layout>

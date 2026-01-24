@@ -1,0 +1,62 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+
+# environment variables
+.env
+.env.production
+.env.*.local
+
+# macOS-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# jetbrains setting folder
+.idea/
+
+# wrangler
+.wrangler/
+wrangler.jsonc
+
+# databases
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db
+
+# drizzle
+drizzle/
+
+# locks
+bun.lock
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# misc
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# testing
+coverage/
+.nyc_output/
+
+# temp files
+tmp/
+temp/
+.cache/
