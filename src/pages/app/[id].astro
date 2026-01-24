@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getDB } from '../../lib/db';
+import { apps } from '../../schema';
+import { eq } from 'drizzle-orm';
+
+const { id } = Astro.params;
+
+const db = getDB(Astro.locals.runtime.env);
+const result = await db.select().from(apps).where(eq(apps.id, id as string));
+
+const app = result[0];
+
+if (!app) {
+	return Astro.redirect('/404');
+}
+---
+
+<Layout title={`${app.title} - Pico`}>
+	<div class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+		<header class="bg-white border-b border-gray-200">
+			<div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+				<h1 class="text-2xl font-bold text-purple-600">Pico</h1>
+				<nav class="flex gap-4">
+					<a href="/" class="text-gray-600 hover:text-purple-600 transition">Home</a>
+					<a href="/create" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Create App</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="max-w-6xl mx-auto px-4 py-8">
+			<div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+				<h2 class="text-2xl font-bold text-gray-900 mb-2">{app.title}</h2>
+				<div class="flex items-center gap-4 text-sm text-gray-500">
+					<span>Created: {new Date(app.createdAt).toLocaleDateString()}</span>
+					<a href={`/app/${app.id}`} class="text-purple-600 hover:underline">Share this link</a>
+				</div>
+			</div>
+
+			<div class="bg-white rounded-xl shadow-lg overflow-hidden">
+				<div class="bg-gray-800 px-4 py-2 flex items-center gap-2">
+					<div class="w-3 h-3 rounded-full bg-red-500"></div>
+					<div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+					<div class="w-3 h-3 rounded-full bg-green-500"></div>
+					<span class="ml-4 text-gray-400 text-sm">App Preview</span>
+				</div>
+				<iframe
+					title={app.title}
+					class="w-full h-96 border-0"
+					sandbox="allow-scripts allow-same-origin"
+				>
+				</iframe>
+			</div>
+
+			<script define:vars={{ app }}>
+				const iframe = document.querySelector('iframe');
+				if (iframe) {
+					const doc = iframe.contentDocument || iframe.contentWindow.document;
+					doc.open();
+					doc.write(`
+						<!DOCTYPE html>
+						<html>
+							<head>
+								${app.css ? `<style>${app.css}</style>` : ''}
+							</head>
+							<body>
+								${app.html}
+								${app.js ? `<script>${app.js}<\/script>` : ''}
+							</body>
+						</html>
+					`);
+					doc.close();
+				}
+			</script>
+		</main>
+	</div>
+</Layout>

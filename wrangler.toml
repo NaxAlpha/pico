@@ -1,0 +1,15 @@
+name = "pico"
+main = "dist/_worker.js/index.js"
+compatibility_date = "2025-01-24"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pico-db"
+database_id = "dd0f53e9-329a-447e-b977-1c4dfea3c810"
+
+[env.preview]
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "pico-preview-db"
+database_id = "<from wrangler d1 create>"
