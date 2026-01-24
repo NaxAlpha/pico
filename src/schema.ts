@@ -11,6 +11,7 @@ export const users = sqliteTable('users', {
 export const apps = sqliteTable('apps', {
   id: text('id').primaryKey(), // slug/UUID
   userId: integer('user_id').references(() => users.id),
+  authorName: text('author_name').notNull().default('Anonymous'),
   title: text('title').notNull(),
   html: text('html').notNull(),
   css: text('css'),
