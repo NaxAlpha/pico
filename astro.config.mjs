@@ -12,8 +12,10 @@ export default defineConfig({
     platformProxy: { enabled: true },
   }),
   integrations: [react()],
-
+  build: {
+    inlineStylesheets: 'always',
+  },
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
 });
