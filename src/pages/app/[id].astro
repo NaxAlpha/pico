@@ -71,58 +71,86 @@ const randomAd = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length
 			<!-- Window Chrome -->
 			<div class="window-chrome">
 				<div class="chrome-left">
-					<a href="/create" class="chrome-icon create-icon" title="Create new app">
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<span class="chrome-logo">Pico</span>
+					<span class="chrome-title" title={app.title}>{app.title}</span>
+				</div>
+			</div>
+
+			<div class="frame-shell">
+				<!-- App iframe -->
+				<div class="iframe-container">
+					<iframe
+						id="app-frame"
+						title={app.title}
+						class="app-iframe"
+						sandbox="allow-scripts allow-same-origin"
+					></iframe>
+				</div>
+
+				<div class="frame-rail frame-rail-top" aria-label="Primary actions">
+					<a href="/create" class="rail-icon-button create-icon" title="Create new app" aria-label="Create new app">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
 							<line x1="12" y1="8" x2="12" y2="16"></line>
 							<line x1="8" y1="12" x2="16" y2="12"></line>
 						</svg>
 					</a>
-					<a href="/" class="chrome-icon home-icon" title="Home">
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<a href="/" class="rail-icon-button home-icon" title="Home" aria-label="Home">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
 							<polyline points="9 22 9 12 15 12 15 22"></polyline>
 						</svg>
 					</a>
-					<span class="chrome-logo">Pico</span>
-					<span class="chrome-title" title={app.title}>{app.title}</span>
 				</div>
-				<div class="chrome-right">
-					<button id="metadata-btn" class="chrome-icon metadata-icon" title="View metadata">
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="10"></circle>
-							<line x1="12" y1="16" x2="12" y2="12"></line>
-							<line x1="12" y1="8" x2="12.01" y2="8"></line>
-						</svg>
-					</button>
-					<button id="share-btn" class="chrome-icon share-icon" title="Share this app">
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="18" cy="5" r="3"></circle>
-							<circle cx="6" cy="12" r="3"></circle>
-							<circle cx="18" cy="19" r="3"></circle>
-							<line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-							<line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-						</svg>
-					</button>
-					<button id="fork-btn" class="chrome-icon fork-icon" title="Fork this app (coming soon)">
-						<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+				<div class="frame-rail frame-rail-bottom" aria-label="Utility actions">
+					<button id="fork-btn" class="rail-icon-button fork-icon" title="Fork this app (coming soon)" type="button" aria-label="Fork this app">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<line x1="6" y1="3" x2="6" y2="15"></line>
 							<circle cx="18" cy="6" r="3"></circle>
 							<circle cx="6" cy="18" r="3"></circle>
 							<path d="M18 9a9 9 0 0 1-9 9"></path>
 						</svg>
 					</button>
+					<button id="metadata-btn" class="rail-icon-button metadata-icon" title="View metadata" type="button" aria-label="View metadata">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="10"></circle>
+							<line x1="12" y1="16" x2="12" y2="12"></line>
+							<line x1="12" y1="8" x2="12.01" y2="8"></line>
+						</svg>
+					</button>
 				</div>
-			</div>
 
-			<!-- App iframe -->
-			<div class="iframe-container">
-				<iframe
-					id="app-frame"
-					title={app.title}
-					class="app-iframe"
-					sandbox="allow-scripts allow-same-origin"
-				></iframe>
+				<div class="bottom-bar" aria-label="Engagement actions">
+					<button id="like-btn" class="bottom-button" title="Like this app" type="button" aria-pressed="false" aria-label="Like this app">
+						<span class="bottom-icon like-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+							</svg>
+						</span>
+						<span id="like-count" class="bottom-count">0</span>
+					</button>
+					<button id="comment-btn" class="bottom-button" title="View comments" type="button" aria-label="View comments">
+						<span class="bottom-icon comment-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path>
+							</svg>
+						</span>
+						<span id="comment-count" class="bottom-count">0</span>
+					</button>
+					<button id="share-btn" class="bottom-button" title="Share this app" type="button" aria-label="Share this app">
+						<span class="bottom-icon share-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<circle cx="18" cy="5" r="3"></circle>
+								<circle cx="6" cy="12" r="3"></circle>
+								<circle cx="18" cy="19" r="3"></circle>
+								<line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+								<line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+							</svg>
+						</span>
+						<span id="share-count" class="bottom-count">0</span>
+					</button>
+				</div>
 			</div>
 		</div>
 
@@ -158,19 +186,59 @@ const randomAd = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length
 			}
 		});
 
-		// Share button
-		const shareBtn = document.getElementById('share-btn');
-		shareBtn?.addEventListener('click', async () => {
-			const fullUrl = window.location.origin + shareUrl;
-			await navigator.clipboard.writeText(fullUrl);
+		const parseCount = (element: HTMLElement | null) => {
+			const value = Number(element?.textContent ?? 0);
+			return Number.isFinite(value) ? value : 0;
+		};
 
-			// Brief visual feedback
-			const originalColor = shareBtn.style.color;
-			shareBtn.style.color = '#10b981';
-			setTimeout(() => {
-				shareBtn.style.color = originalColor;
-			}, 500);
-		});
+		// Like button
+		const likeBtn = document.getElementById('like-btn') as HTMLButtonElement | null;
+		const likeCountEl = document.getElementById('like-count');
+		let likeCount = parseCount(likeCountEl);
+		if (likeBtn && likeCountEl) {
+			let liked = false;
+			likeBtn.addEventListener('click', () => {
+				liked = !liked;
+				likeBtn.setAttribute('aria-pressed', liked.toString());
+				likeBtn.classList.toggle('is-active', liked);
+				likeCount = Math.max(0, likeCount + (liked ? 1 : -1));
+				likeCountEl.textContent = likeCount.toString();
+			});
+		}
+
+		// Comment button (placeholder)
+		const commentBtn = document.getElementById('comment-btn');
+		if (commentBtn) {
+			commentBtn.addEventListener('click', () => {
+				alert('Comments are coming soon!');
+			});
+		}
+
+		// Share button
+		const shareBtn = document.getElementById('share-btn') as HTMLButtonElement | null;
+		const shareCountEl = document.getElementById('share-count');
+		let shareCount = parseCount(shareCountEl);
+		if (shareBtn) {
+			shareBtn.addEventListener('click', async () => {
+				const fullUrl = window.location.origin + shareUrl;
+				try {
+					await navigator.clipboard.writeText(fullUrl);
+				} catch {
+					// Ignore clipboard errors; still provide visual feedback.
+				}
+
+				if (shareCountEl) {
+					shareCount += 1;
+					shareCountEl.textContent = shareCount.toString();
+				}
+
+				// Brief visual feedback
+				shareBtn.classList.add('is-flashed');
+				setTimeout(() => {
+					shareBtn.classList.remove('is-flashed');
+				}, 500);
+			});
+		}
 
 		// Fork button (placeholder)
 		const forkBtn = document.getElementById('fork-btn');
@@ -295,6 +363,9 @@ const randomAd = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length
 		width: 100%;
 		max-width: 375px;
 		background: #000;
+		--rail-size: 34px;
+		--rail-offset: 12px;
+		--bottom-bar-height: 56px;
 		border-radius: 12px;
 		overflow: hidden;
 		box-shadow:
@@ -305,40 +376,138 @@ const randomAd = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length
 	/* Window Chrome */
 	.window-chrome {
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-start;
 		align-items: center;
 		background: #1d1d1f;
 		padding: 10px 14px;
-		gap: 8px;
+		gap: 10px;
 	}
 
-	.chrome-left,
-	.chrome-right {
+	.chrome-left {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: 10px;
 	}
 
-	.chrome-icon {
+	.frame-shell {
+		position: relative;
+	}
+
+	.frame-rail {
+		position: absolute;
+		right: var(--rail-offset);
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		z-index: 2;
+	}
+
+	.frame-rail-top {
+		top: var(--rail-offset);
+	}
+
+	.frame-rail-bottom {
+		bottom: calc(var(--bottom-bar-height) + var(--rail-offset));
+	}
+
+	.rail-icon-button {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 28px;
-		height: 28px;
-		border-radius: 6px;
-		background: transparent;
-		border: none;
+		width: var(--rail-size);
+		height: var(--rail-size);
+		border-radius: 10px;
+		background: rgba(18, 18, 20, 0.92);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		color: #e5e5e5;
 		cursor: pointer;
 		transition: all 0.15s ease;
-		color: #888;
+		text-decoration: none;
 	}
 
-	.chrome-icon:hover {
-		background: rgba(255, 255, 255, 0.1);
+	.rail-icon-button:hover {
+		background: rgba(255, 255, 255, 0.08);
+		border-color: rgba(255, 255, 255, 0.2);
 	}
 
-	.chrome-icon:active {
-		transform: scale(0.95);
+	.rail-icon-button:active {
+		transform: scale(0.96);
+	}
+
+	.rail-icon-button:focus-visible {
+		outline: 2px solid rgba(59, 130, 246, 0.7);
+		outline-offset: 2px;
+	}
+
+	.bottom-bar {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		height: var(--bottom-bar-height);
+		padding: 0 12px;
+		box-sizing: border-box;
+		background: #161618;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.bottom-button {
+		flex: 1 1 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		height: 36px;
+		border-radius: 10px;
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid transparent;
+		cursor: pointer;
+		color: #e5e5e5;
+		font-size: 12px;
+		font-family: inherit;
+		letter-spacing: 0.2px;
+		transition: all 0.15s ease;
+	}
+
+	.bottom-button:hover {
+		background: rgba(255, 255, 255, 0.08);
+		border-color: rgba(255, 255, 255, 0.12);
+	}
+
+	.bottom-button:active {
+		transform: scale(0.98);
+	}
+
+	.bottom-button:focus-visible {
+		outline: 2px solid rgba(59, 130, 246, 0.7);
+		outline-offset: 2px;
+	}
+
+	.bottom-button.is-active {
+		background: rgba(244, 114, 182, 0.15);
+		border-color: rgba(244, 114, 182, 0.4);
+	}
+
+	.bottom-button.is-flashed {
+		background: rgba(16, 185, 129, 0.18);
+		border-color: rgba(16, 185, 129, 0.4);
+	}
+
+	.bottom-button.is-flashed .bottom-icon {
+		color: #10b981;
+	}
+
+	.bottom-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 16px;
+		height: 16px;
+	}
+
+	.bottom-count {
+		color: #d4d4d8;
+		font-size: 12px;
+		font-weight: 600;
 	}
 
 	/* Icon colors */
@@ -362,9 +531,12 @@ const randomAd = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length
 		color: #ec4899;
 	}
 
-	.chrome-icon a {
-		color: inherit;
-		text-decoration: none;
+	.like-icon {
+		color: #f472b6;
+	}
+
+	.comment-icon {
+		color: #38bdf8;
 	}
 
 	.chrome-logo {
@@ -378,7 +550,7 @@ const randomAd = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length
 		font-size: 13px;
 		font-weight: 500;
 		color: #e5e5e5;
-		max-width: 120px;
+		max-width: 180px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -386,15 +558,18 @@ const randomAd = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length
 
 	/* Iframe Container */
 	.iframe-container {
-		height: calc(100vh - 120px - 90px - 40px);
+		height: calc(100vh - 120px - 90px - 40px - var(--bottom-bar-height));
 		min-height: 400px;
-		background: #000;
+		background: #2b2b2b;
+		padding-right: calc(var(--rail-size) + (var(--rail-offset) * 2));
+		box-sizing: border-box;
 	}
 
 	.app-iframe {
 		width: 100%;
 		height: 100%;
 		border: none;
+		background: #2b2b2b;
 	}
 
 	/* Metadata Dialog */
@@ -546,23 +721,33 @@ const randomAd = adPlaceholders[Math.floor(Math.random() * adPlaceholders.length
 			max-width: 100%;
 		}
 
+		.mobile-frame {
+			--rail-size: 30px;
+			--rail-offset: 10px;
+			--bottom-bar-height: 52px;
+		}
+
 		.chrome-title {
-			max-width: 80px;
+			max-width: 140px;
 		}
 
 		.iframe-container {
-			height: calc(100vh - 100px - 90px - 24px);
+			height: calc(100vh - 100px - 90px - 24px - var(--bottom-bar-height));
 			min-height: 300px;
 		}
 
-		.chrome-icon {
-			width: 26px;
-			height: 26px;
+		.bottom-bar {
+			padding: 0 10px;
+			gap: 8px;
 		}
 
-		.chrome-icon svg {
-			width: 13px;
-			height: 13px;
+		.bottom-button {
+			height: 34px;
+			font-size: 11px;
+		}
+
+		.bottom-count {
+			font-size: 11px;
 		}
 
 		.chrome-logo {
